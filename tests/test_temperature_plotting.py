@@ -22,6 +22,7 @@ def test_compute_mean():
     calc = tpl.compute_mean([])
     assert calc == None
     
+def test_fail():
     calc = tpl.compute_mean([1])
     assert calc == 0
 

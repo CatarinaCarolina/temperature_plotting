@@ -13,9 +13,13 @@ permissions:
   contents: read
 
 jobs: #the steps that are run
-  build:
-
-    runs-on: ubuntu-latest #defines the OS, windows-latest for example
+  test:
+    strategy:
+      matrix:
+        os: [windows-latest, macos-latest, ubuntu-latest]
+      fail-fast: false #run all os instead of cancelling when once fails
+        
+    runs-on: ${{ matrix.os }} #ubuntu-latest #defines the OS, windows-latest for example
 
     steps: #each dash is another step
     - uses: actions/checkout@v3 #downloads code from github

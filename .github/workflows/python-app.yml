@@ -9,8 +9,6 @@ on: #when and where this code will run
   pull_request:
     branches: [ "main" ] #if pull request to main it will run
 
-permissions:
-  contents: read
 
 jobs: #the steps that are run
   test:

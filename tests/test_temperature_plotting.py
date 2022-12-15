@@ -21,6 +21,9 @@ def test_compute_mean():
     
     calc = tpl.compute_mean([])
     assert calc == None
+    
+    calc = tpl.compute_mean([1])
+    assert calc == 0
 
 
 def test_main():

@@ -16,7 +16,7 @@ jobs: #the steps that are run
   test:
     strategy:
       matrix:
-        os: [windows-latest, macos-latest, ubuntu-latest]
+        os: [ubuntu-latest]
         python-version: ['3.9','3.10']
       fail-fast: false #run all os instead of cancelling when once fails
         
@@ -37,3 +37,38 @@ jobs: #the steps that are run
     - name: Test with pytest
       run: |
         pytest
+        
+        
+  Docs:
+    runs-on: ubuntu-latest #defines the OS, windows-latest for example
+
+    steps: #each dash is another step
+    - uses: actions/checkout@v3 #downloads code from github
+    - name: Set up Python 3.10
+      uses: actions/setup-python@v3
+      with:
+        python-version: '3.10'
+    - name: Install dependencies
+      shell: bash
+      run: |
+        python -m pip install --upgrade pip
+        pip install flake8 pytest
+        if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+
+    - name: Build Documentation
+      run: |
+        sphinx-build doc _build
+    - name: publish docu
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+        publish_branch: gh-pages
+        publish_dir: _build
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        
+        
+        
+        
+        
+        
+        
+          

@@ -39,6 +39,7 @@ jobs: #the steps that are run
         
   Docs:
     runs-on: ubuntu-latest #defines the OS, windows-latest for example
+    needs: test
 
     steps: #each dash is another step
     - uses: actions/checkout@v3 #downloads code from github
